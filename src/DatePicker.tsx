@@ -11,7 +11,7 @@ export const ChakraDatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       <DatePicker
         popperPlacement="bottom-end"
         showPopperArrow={false}
-        renderCustomHeader={(props) => {
+        renderCustomHeader={(headerProps) => {
           return (
             <HStack
               sx={{
@@ -24,18 +24,21 @@ export const ChakraDatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               }}
             >
               <IconButton
-                onClick={props.decreaseMonth}
+                onClick={headerProps.decreaseMonth}
                 size="sm"
                 variant="ghost"
                 icon={<BackIcon />}
                 aria-label="next"
               />
               <Text>
-                {getMonthName(props.date.getMonth(), 'long')}{' '}
-                {props.date.getFullYear()}
+                {getMonthName(
+                  headerProps.date.getMonth(),
+                  props.showMonthYearPicker ? 'short' : 'long'
+                )}{' '}
+                {headerProps.date.getFullYear()}
               </Text>
               <IconButton
-                onClick={props.increaseMonth}
+                onClick={headerProps.increaseMonth}
                 size="sm"
                 variant="ghost"
                 icon={<NextIcon />}
